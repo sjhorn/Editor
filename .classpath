@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="GROOVY_SUPPORT"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="GROOVY_DSL_SUPPORT"/>
+	<classpathentry kind="lib" path="libs/com.ibm.icu_4.2.1.v20100412.jar"/>
+	<classpathentry kind="lib" path="libs/miglayout-3.7.4-swt.jar"/>
+	<classpathentry kind="lib" path="libs/org.eclipse.core.commands_3.6.0.I20100512-1500.jar"/>
+	<classpathentry kind="lib" path="libs/org.eclipse.core.runtime_3.6.0.v20100505.jar"/>
+	<classpathentry kind="lib" path="libs/org.eclipse.equinox.common_3.6.0.v20100503.jar"/>
+	<classpathentry kind="lib" path="libs/org.eclipse.jface_3.6.2.M20110210-1200.jar"/>
+	<classpathentry kind="lib" path="libs/org.eclipse.jface.databinding_1.4.0.I20100601-0800.jar"/>
+	<classpathentry kind="lib" path="libs/org.eclipse.jface.text_3.6.1.r361_v20100825-0800.jar"/>
+	<classpathentry kind="lib" path="libs/org.eclipse.osgi_3.6.2.R36x_v20110210.jar"/>
+	<classpathentry kind="lib" path="libs/org.eclipse.swt_3.6.2.v3659c.jar"/>
+	<classpathentry kind="lib" path="libs/org.eclipse.swt.cocoa.macosx.x86_64_3.6.2.v3659b.jar"/>
+	<classpathentry kind="lib" path="libs/org.eclipse.text_3.5.0.v20100601-1300.jar"/>
+	<classpathentry kind="lib" path="libs/dd-plist.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
