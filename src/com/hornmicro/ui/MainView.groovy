@@ -1,18 +1,23 @@
 package com.hornmicro.ui
 
 import org.eclipse.jface.window.ApplicationWindow
-import org.eclipse.jface.text.TextViewer;
 import org.eclipse.jface.text.Document
+import org.eclipse.jface.text.source.SourceViewer;
+import org.eclipse.jface.text.source.VerticalRuler;
 
 import org.eclipse.swt.SWT
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Display
 import org.eclipse.swt.widgets.Composite
 import org.eclipse.swt.widgets.Control
 import org.eclipse.swt.widgets.Shell
 
+import com.hornmicro.syntaxhighlight.TextEditorSourceViewerConfiguration;
+
+
 class MainView extends ApplicationWindow {
-    TextViewer viewer
+    SourceViewer viewer
     Document model 
     
     public MainView() {
@@ -32,9 +37,23 @@ class MainView extends ApplicationWindow {
     }
 
     protected Control createContents(Composite parent) {
-        viewer = new TextViewer(parent, SWT.NONE)
+        viewer = new SourceViewer(parent, new VerticalRuler(10), SWT.V_SCROLL
+            | SWT.H_SCROLL);
+        
+        
+        viewer.configure(new TextEditorSourceViewerConfiguration());
         viewer.document = model
-        viewer.textWidget.font = new Font()
+        
+        Font initialFont = viewer.textWidget.font
+        FontData[] fontData = initialFont.getFontData();
+        for (int i = 0; i < fontData.length; i++) {
+            fontData[i].setHeight(12)
+            fontData[i].setName("Mensch")
+        }
+        Font newFont = new Font(Display.current, fontData);
+        viewer.textWidget.font = newFont
+        
+        
         return viewer.textWidget
     }
     
