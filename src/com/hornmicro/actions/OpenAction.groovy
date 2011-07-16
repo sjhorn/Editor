@@ -41,7 +41,7 @@ class OpenAction extends Action {
         def proceed = true;
         if (model.isDirty()) {
             proceed = MessageDialog.openConfirm(shell, "Are you sure?",
-                    "You have unsaved changes--are you sure you want to lose them?");
+                    "You have unsaved changes, are you sure you want to lose them?");
         }
         return proceed;
     }

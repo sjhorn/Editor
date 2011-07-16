@@ -26,6 +26,7 @@ import com.hornmicro.actions.OpenAction;
 import com.hornmicro.actions.PreferenceAction;
 import com.hornmicro.actions.RedoAction;
 import com.hornmicro.actions.SaveAction;
+import com.hornmicro.actions.SaveAsAction;
 import com.hornmicro.actions.UndoAction;
 
 class MainView extends ApplicationWindow {
@@ -38,6 +39,7 @@ class MainView extends ApplicationWindow {
     Action redoAction = new RedoAction()
     Action openAction = new OpenAction()
     Action saveAction = new SaveAction()
+    Action saveAsAction = new SaveAsAction()
     Action closeAction = new CloseAction()
     
     Action preferenceAction = new PreferenceAction()
@@ -91,6 +93,7 @@ class MainView extends ApplicationWindow {
         menuManager.add(fileMenu)
         fileMenu.add(openAction)
         fileMenu.add(saveAction)
+        fileMenu.add(saveAsAction)
         fileMenu.add(closeAction)
         
         menuManager.add(editMenu)
