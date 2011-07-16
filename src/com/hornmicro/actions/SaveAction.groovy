@@ -14,7 +14,6 @@ class SaveAction extends Action {
     }
     
     void run() {
-        MessageDialog.openInformation(TextEditor.APP.view.shell,
-            "Save", "TODO");
+        TextEditor.APP.model.save()
     }
 }

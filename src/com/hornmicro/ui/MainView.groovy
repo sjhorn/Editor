@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.Shell
 
 import com.hornmicro.CocoaUIEnhancer;
 import com.hornmicro.actions.AboutAction;
+import com.hornmicro.actions.CloseAction;
 import com.hornmicro.actions.OpenAction;
 import com.hornmicro.actions.PreferenceAction;
 import com.hornmicro.actions.RedoAction;
@@ -37,6 +38,7 @@ class MainView extends ApplicationWindow {
     Action redoAction = new RedoAction()
     Action openAction = new OpenAction()
     Action saveAction = new SaveAction()
+    Action closeAction = new CloseAction()
     
     Action preferenceAction = new PreferenceAction()
     Action aboutAction = new AboutAction()
@@ -89,6 +91,7 @@ class MainView extends ApplicationWindow {
         menuManager.add(fileMenu)
         fileMenu.add(openAction)
         fileMenu.add(saveAction)
+        fileMenu.add(closeAction)
         
         menuManager.add(editMenu)
         editMenu.add(undoAction)
@@ -115,5 +118,6 @@ class MainView extends ApplicationWindow {
         
         return menuManager
     }
+    
     
 }

@@ -11,8 +11,8 @@ import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocumentListener;
 
 class PersistentDocument extends Document implements IDocumentListener {
-    private String fileName;
-    private boolean dirty;
+    String fileName
+    boolean dirty
 
     PersistentDocument() {
         addDocumentListener(this);

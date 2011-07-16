@@ -22,7 +22,7 @@ public class TextEditor {
     static final String PARTITIONING = "text_partitioning"
     static TextEditor APP 
     MainView view
-    def document
+    PersistentDocument model
     def colorManager
     def codeScanner
     def scanner
@@ -34,15 +34,16 @@ public class TextEditor {
         colorManager = new ColorManager()
         codeScanner = new CodeScanner()
         view = new MainView()
-        setUpDocument()
+        setUpModel()
     }
 
     void run() {
         view.run()
     }
 
-    protected void setUpDocument() {
-        view.model = new PersistentDocument()
+    protected void setUpModel() {
+        model = new PersistentDocument()
+        view.model = model
         view.config = new TextEditorSourceViewerConfiguration()
         
         scanner = new PartitionScanner()
