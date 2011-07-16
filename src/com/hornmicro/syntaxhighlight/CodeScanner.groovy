@@ -19,7 +19,7 @@ import com.hornmicro.TextEditor;
 
 class CodeScanner extends RuleBasedScanner {
     
-    public CodeScanner() {
+    public CodeScanner() { 
         ColorManager cm = TextEditor.APP.getColorManager();
 
         // Create the tokens for keywords, strings, and other (everything else)
