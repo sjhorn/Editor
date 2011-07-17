@@ -6,6 +6,11 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.text.Document
 import org.eclipse.jface.text.IUndoManager;
 import org.eclipse.jface.text.TextViewerUndoManager;
+import org.eclipse.jface.text.source.AnnotationModel;
+import org.eclipse.jface.text.source.AnnotationRulerColumn;
+import org.eclipse.jface.text.source.ChangeRulerColumn;
+import org.eclipse.jface.text.source.CompositeRuler;
+import org.eclipse.jface.text.source.LineNumberChangeRulerColumn;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.jface.text.source.VerticalRuler;
@@ -20,6 +25,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell
 
 import com.hornmicro.CocoaUIEnhancer;
+import com.hornmicro.TextEditor;
 import com.hornmicro.actions.AboutAction;
 import com.hornmicro.actions.CloseAction;
 import com.hornmicro.actions.OpenAction;
@@ -65,12 +71,26 @@ class MainView extends ApplicationWindow {
     }
 
     protected Control createContents(Composite parent) {
-        sourceViewer = new SourceViewer(parent, new VerticalRuler(25), SWT.V_SCROLL | SWT.H_SCROLL);
+        AnnotationModel annotationModel = new AnnotationModel()
+        annotationModel.connect(model)
+        
+        LineNumberChangeRulerColumn lineNumberChangeRulerColumn = 
+            new LineNumberChangeRulerColumn(TextEditor.APP.colorManager)
+        lineNumberChangeRulerColumn.model = annotationModel
+        lineNumberChangeRulerColumn.setBackground(Display.current.getSystemColor(SWT.COLOR_WIDGET_BACKGROUND))
+        lineNumberChangeRulerColumn.setForeground(Display.current.getSystemColor(SWT.COLOR_DARK_GRAY))
+        lineNumberChangeRulerColumn.font = new Font(Display.current,"Mensch", 12, SWT.NORMAL)
+        
+        CompositeRuler compositeRuler = new CompositeRuler(5)
+        compositeRuler.model = annotationModel
+        
+        compositeRuler.addDecorator(0, new AnnotationRulerColumn(10))
+        compositeRuler.addDecorator(1, lineNumberChangeRulerColumn)
+        compositeRuler.addDecorator(2, new AnnotationRulerColumn(10))
+        
+        sourceViewer = new SourceViewer(parent, compositeRuler, SWT.V_SCROLL | SWT.H_SCROLL);
         sourceViewer.setDocument(model)
         sourceViewer.configure(config)
-        
-        undoManager = new TextViewerUndoManager(500)
-        undoManager.connect(sourceViewer)
         
         Font initialFont = sourceViewer.textWidget.font
         FontData[] fontData = initialFont.getFontData();
@@ -80,6 +100,9 @@ class MainView extends ApplicationWindow {
         }
         Font newFont = new Font(Display.current, fontData);
         sourceViewer.textWidget.font = newFont
+        
+        undoManager = new TextViewerUndoManager(500)
+        undoManager.connect(sourceViewer)
         
         return sourceViewer.textWidget
     }
@@ -116,9 +139,6 @@ class MainView extends ApplicationWindow {
            editMenu.add(preferenceAction)
            helpMenu.add(aboutAction)
         }
-        
-        
-        
         return menuManager
     }
     

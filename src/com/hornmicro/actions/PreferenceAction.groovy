@@ -3,6 +3,8 @@ package com.hornmicro.actions
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
 
+import com.hornmicro.TextEditor;
+
 class PreferenceAction extends Action {
     PreferenceAction() {
         super("&Preferences")

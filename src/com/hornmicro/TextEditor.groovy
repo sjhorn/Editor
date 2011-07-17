@@ -23,7 +23,7 @@ public class TextEditor {
     static TextEditor APP 
     MainView view
     PersistentDocument model
-    def colorManager
+    ColorManager colorManager
     def codeScanner
     def scanner
     

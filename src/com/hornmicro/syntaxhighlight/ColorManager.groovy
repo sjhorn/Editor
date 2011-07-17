@@ -4,11 +4,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.eclipse.jface.text.source.ISharedTextColors;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 
-class ColorManager {
+class ColorManager implements ISharedTextColors {
     static final RGB BACKGROUND = new RGB(255, 255, 255)
     static final RGB COMMENT = new RGB(0, 128, 0)
     static final RGB DEFAULT = new RGB(0, 0, 0)

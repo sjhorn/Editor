@@ -14,6 +14,10 @@ class SaveAction extends Action {
     }
     
     void run() {
-        TextEditor.APP.model.save()
+        if(TextEditor.APP.model.fileName) {
+            TextEditor.APP.model.save()
+        } else {
+            new SaveAsAction().run()
+        }
     }
 }
