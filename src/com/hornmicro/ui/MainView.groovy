@@ -3,6 +3,8 @@ package com.hornmicro.ui
 import org.eclipse.jface.window.ApplicationWindow
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.text.CursorLinePainter;
 import org.eclipse.jface.text.Document
 import org.eclipse.jface.text.IUndoManager;
 import org.eclipse.jface.text.TextViewerUndoManager;
@@ -18,6 +20,7 @@ import org.eclipse.jface.text.source.VerticalRuler;
 import org.eclipse.swt.SWT
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display
 import org.eclipse.swt.widgets.Composite
 import org.eclipse.swt.widgets.Control
@@ -28,11 +31,15 @@ import com.hornmicro.CocoaUIEnhancer;
 import com.hornmicro.TextEditor;
 import com.hornmicro.actions.AboutAction;
 import com.hornmicro.actions.CloseAction;
+import com.hornmicro.actions.CopyAction;
+import com.hornmicro.actions.CutAction;
 import com.hornmicro.actions.OpenAction;
+import com.hornmicro.actions.PasteAction;
 import com.hornmicro.actions.PreferenceAction;
 import com.hornmicro.actions.RedoAction;
 import com.hornmicro.actions.SaveAction;
 import com.hornmicro.actions.SaveAsAction;
+import com.hornmicro.actions.SelectAllAction;
 import com.hornmicro.actions.UndoAction;
 
 class MainView extends ApplicationWindow {
@@ -41,12 +48,19 @@ class MainView extends ApplicationWindow {
     SourceViewerConfiguration config
     TextViewerUndoManager undoManager
     
-    Action undoAction = new UndoAction()
-    Action redoAction = new RedoAction()
     Action openAction = new OpenAction()
     Action saveAction = new SaveAction()
     Action saveAsAction = new SaveAsAction()
     Action closeAction = new CloseAction()
+    
+    Action undoAction = new UndoAction()
+    Action redoAction = new RedoAction()
+    
+    Action cutAction = new CutAction()
+    Action copyAction = new CopyAction()
+    Action pasteAction = new PasteAction()
+    
+    Action selectAllAction = new SelectAllAction()
     
     Action preferenceAction = new PreferenceAction()
     Action aboutAction = new AboutAction()
@@ -92,6 +106,10 @@ class MainView extends ApplicationWindow {
         sourceViewer.setDocument(model)
         sourceViewer.configure(config)
         
+        CursorLinePainter clp = new CursorLinePainter(sourceViewer)
+        clp.setHighlightColor(TextEditor.APP.colorManager.getColor(new RGB(0xff, 0xfe, 0xcc)))
+        sourceViewer.addPainter(clp)
+        
         Font initialFont = sourceViewer.textWidget.font
         FontData[] fontData = initialFont.getFontData();
         for (int i = 0; i < fontData.length; i++) {
@@ -122,6 +140,12 @@ class MainView extends ApplicationWindow {
         menuManager.add(editMenu)
         editMenu.add(undoAction)
         editMenu.add(redoAction)
+        editMenu.add(new Separator())
+        editMenu.add(copyAction)
+        editMenu.add(cutAction)
+        editMenu.add(pasteAction)
+        editMenu.add(new Separator())
+        editMenu.add(selectAllAction)
         
         
         menuManager.add(helpMenu)

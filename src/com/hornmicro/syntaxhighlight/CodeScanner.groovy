@@ -24,8 +24,7 @@ class CodeScanner extends RuleBasedScanner {
 
         // Create the tokens for keywords, strings, and other (everything else)
         IToken keyword = new Token(
-            new TextAttribute(cm.getColor(ColorManager.KEYWORD),
-            cm.getColor(ColorManager.BACKGROUND), SWT.BOLD)
+            new TextAttribute(cm.getColor(ColorManager.KEYWORD))
         )
         IToken other = new Token(
             new TextAttribute(cm.getColor(ColorManager.DEFAULT))
