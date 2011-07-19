@@ -17,7 +17,11 @@ class PersistentDocument extends Document implements IDocumentListener {
     PersistentDocument() {
         addDocumentListener(this);
     }
-
+    
+    int getSize() {
+        return get().size()    
+    }
+    
     void save() {
         if (fileName == null) {
             throw new IllegalStateException("Can't save file with null name");

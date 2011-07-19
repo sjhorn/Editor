@@ -8,8 +8,8 @@ import org.eclipse.jface.text.rules.Token;
 
 
 class PartitionScanner extends RuleBasedPartitionScanner {
-    public static final String COMMENT = "comment";
-    public static final String[] TYPES = { COMMENT};
+    public static final String COMMENT = "comment"
+    public static final String[] TYPES = { COMMENT }
   
     public PartitionScanner() {
       super();

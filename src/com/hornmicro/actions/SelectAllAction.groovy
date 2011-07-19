@@ -1,9 +1,11 @@
 package com.hornmicro.actions
 
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.swt.SWT;
 
 import com.hornmicro.TextEditor;
+import com.hornmicro.ui.PersistentDocument;
 
 class SelectAllAction extends Action {
     SelectAllAction() {
@@ -13,6 +15,8 @@ class SelectAllAction extends Action {
     }
     
     void run() {
-        def shell = TextEditor.APP.view.sourceViewer.textWidget.selectAll()
+        SourceViewer viewer = TextEditor.APP.view.sourceViewer
+        PersistentDocument doc = TextEditor.APP.model
+        viewer.setSelectedRange(0, doc.size)
     }
 }

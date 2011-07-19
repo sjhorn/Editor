@@ -51,16 +51,13 @@ class CodeScanner extends RuleBasedScanner {
         }))
 
         // Add rule for keywords, and add the words to the rule
-        WordRule wordRule = new WordRule(new WordDetector(), other)
-        int i = 0
-        for (int n = Syntax.KEYWORDS.length; i < n; i++) {
-            wordRule.addWord(Syntax.KEYWORDS[i], keyword)
+        WordRule wordRule = new WordRule(new WordDetector())
+        Syntax.KEYWORDS.each {
+            wordRule.addWord(it, keyword)
         }
         rules.add(wordRule)
 
-        IRule[] result = new IRule[rules.size()];
-        rules.toArray(result);
-        setRules(result);
+        setRules(rules as IRule[]);
     }
 }
 
@@ -128,23 +125,11 @@ public class Syntax {
 
 public class WordDetector implements IWordDetector {
     public boolean isWordStart(char c) {
-        int i = 0
-        for (int n = Syntax.KEYWORDS.length; i < n; i++) {
-            if (c == ((String) Syntax.KEYWORDS[i]).charAt(0)) {
-                return true;
-            }
-        }
-        return false;
+        return Syntax.KEYWORDS.find { it[0] == c }
     }
 
     public boolean isWordPart(char c) {
-        int i = 0
-        int n
-        for (n = Syntax.KEYWORDS.length; i < n; i++) {
-            if (((String) Syntax.KEYWORDS[i]).indexOf(c as String) != -1) {
-                return true
-            }
-        }
-        return false
+        return (c as String) =~ /\w/
+        //return Syntax.KEYWORDS.find { it.contains(c as String) } 
     }
 }
