@@ -4,17 +4,21 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.swt.SWT;
 
 import com.hornmicro.TextEditor;
+import com.hornmicro.ui.MainController;
 
 
 class UndoAction extends Action {
+    MainController controller
     
-    UndoAction() {
+    UndoAction(MainController controller) {
         super("&Undo")   
         setAccelerator(SWT.MOD1 + (int)'Z' )
         setToolTipText("Undo")
+        
+        this.controller = controller
     }
 
     void run() {
-        TextEditor.APP.view.undoManager.undo()
+        controller.undoManager.undo()
     }
 }

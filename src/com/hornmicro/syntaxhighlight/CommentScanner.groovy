@@ -1,16 +1,13 @@
 package com.hornmicro.syntaxhighlight
 
-import org.eclipse.jface.text.TextAttribute;
-import org.eclipse.jface.text.rules.IToken;
-import org.eclipse.jface.text.rules.RuleBasedScanner;
-import org.eclipse.jface.text.rules.Token;
-
-import com.hornmicro.TextEditor;
+import org.eclipse.jface.text.TextAttribute
+import org.eclipse.jface.text.rules.IToken
+import org.eclipse.jface.text.rules.RuleBasedScanner
+import org.eclipse.jface.text.rules.Token
 
 
 class CommentScanner extends RuleBasedScanner {
-  public CommentScanner() {
-    ColorManager colorManager = TextEditor.APP.getColorManager();
+  public CommentScanner(ColorManager colorManager) {
 
     // Create the tokens
     IToken other = new Token(new TextAttribute(colorManager

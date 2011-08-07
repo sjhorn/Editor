@@ -8,18 +8,22 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 
 import com.hornmicro.TextEditor;
+import com.hornmicro.ui.MainController;
 
 class OpenAction extends Action {
+    MainController controller
     
-    OpenAction() {
+    OpenAction(MainController controller) {
         super("&Open")
         setAccelerator(SWT.MOD1 + (int)'O' )
         setToolTipText("Open")
+        
+        this.controller = controller
     }
     
     void run() {
-        def model = TextEditor.APP.model
-        def shell = TextEditor.APP.view.shell
+        def model = controller.model
+        def shell = controller.shell
 
         FileDialog dlg = new FileDialog(shell, SWT.OPEN)
         dlg.filterNames = ["Groovy Files (*.groovy)", "All Files (*.*)"]

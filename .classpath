@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
 	<classpathentry exported="true" kind="con" path="GROOVY_SUPPORT"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="con" path="GROOVY_DSL_SUPPORT"/>
@@ -18,5 +19,18 @@
 	<classpathentry kind="lib" path="libs/org.eclipse.text_3.5.0.v20100601-1300.jar"/>
 	<classpathentry kind="lib" path="libs/dd-plist.jar"/>
 	<classpathentry kind="lib" path="libs/org.eclipse.core.jobs_3.5.1.R36x_v20100824.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="lib" path="testlibs/org.apache.log4j_1.2.13.v200903072027.jar"/>
+	<classpathentry kind="lib" path="testlibs/org.eclipse.swtbot.junit4_x_2.0.4.20110304_0338-e5aff47-dev-e36.jar"/>
+	<classpathentry kind="lib" path="testlibs/org.eclipse.swtbot.swt.finder_2.0.4.20110304_0338-e5aff47-dev-e36.jar"/>
+	<classpathentry kind="lib" path="testlibs/org.hamcrest_1.1.0.v20090501071000.jar"/>
+	<classpathentry kind="lib" path="testlibs/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+	<classpathentry kind="lib" path="testlibs/org.hamcrest.core.source_1.1.0.v20090501071000.jar"/>
+	<classpathentry kind="lib" path="testlibs/org.hamcrest.integration_1.1.0.v20090501071000.jar"/>
+	<classpathentry kind="lib" path="testlibs/org.hamcrest.integration.source_1.1.0.v20090501071000.jar"/>
+	<classpathentry kind="lib" path="testlibs/org.hamcrest.library_1.1.0.v20090501071000.jar"/>
+	<classpathentry kind="lib" path="testlibs/org.hamcrest.library.source_1.1.0.v20090501071000.jar"/>
+	<classpathentry kind="lib" path="testlibs/org.hamcrest.text_1.1.0.v20090501071000.jar"/>
+	<classpathentry kind="lib" path="testlibs/org.hamcrest.text.source_1.1.0.v20090501071000.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

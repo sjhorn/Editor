@@ -5,19 +5,24 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 
 import com.hornmicro.TextEditor;
+import com.hornmicro.ui.MainController;
 
 class SaveAction extends Action {
-    SaveAction() {
+    MainController controller
+    
+    SaveAction(MainController controller) {
         super("&Save")
         setAccelerator(SWT.MOD1 + (int)'S' )
         setToolTipText("Save")
+        
+        this.controller = controller
     }
     
     void run() {
-        if(TextEditor.APP.model.fileName) {
-            TextEditor.APP.model.save()
+        if(controller.model.fileName) {
+            controller.model.save()
         } else {
-            new SaveAsAction().run()
+            new SaveAsAction(controller).run()
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.hornmicro
+package com.hornmicro.ui
 
 import net.miginfocom.swt.MigLayout;
 

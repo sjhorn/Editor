@@ -16,21 +16,21 @@ import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.swt.SWT;
 
 import com.hornmicro.TextEditor;
+import com.hornmicro.ui.MainController;
 
 class CodeScanner extends RuleBasedScanner {
     
-    public CodeScanner() { 
-        ColorManager cm = TextEditor.APP.getColorManager();
+    public CodeScanner(ColorManager colorManager) { 
 
         // Create the tokens for keywords, strings, and other (everything else)
         IToken keyword = new Token(
-            new TextAttribute(cm.getColor(ColorManager.KEYWORD))
+            new TextAttribute(colorManager.getColor(ColorManager.KEYWORD))
         )
         IToken other = new Token(
-            new TextAttribute(cm.getColor(ColorManager.DEFAULT))
+            new TextAttribute(colorManager.getColor(ColorManager.DEFAULT))
         )
         IToken string = new Token(
-            new TextAttribute(cm.getColor(ColorManager.STRING))
+            new TextAttribute(colorManager.getColor(ColorManager.STRING))
         )
 
         // Use "other" for default

@@ -10,16 +10,21 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
 
 import com.hornmicro.TextEditor;
+import com.hornmicro.ui.MainController;
 
 class SaveAsAction extends Action {
-    SaveAsAction() {
+    MainController controller
+    
+    SaveAsAction(MainController controller) {
         super("Save As")
         setToolTipText("Save As")
+        
+        this.controller = controller
     }
     
     void run() {
-        def model = TextEditor.APP.model
-        def shell = TextEditor.APP.view.shell
+        def model = controller.model
+        def shell = controller.shell
         String fileName
         FileDialog dlg = new FileDialog(shell, SWT.SAVE)
         dlg.filterNames = ["Groovy Files (*.groovy)", "All Files (*.*)"]
