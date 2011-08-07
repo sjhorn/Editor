@@ -1,2 +1,3 @@
-My first attempt at making an cross platform syntax highlighting editor. Will be using the groovy language and
+My first attempt at making an cross platform syntax highlighting editor. 
+Will be using the groovy language and
 building on the foundatation of SWT/JFACE/ECLIPSE. 
