@@ -1,21 +1,19 @@
 package com.hornmicro.actions;
 
-import java.lang.Thread.UncaughtExceptionHandler;
+import groovy.mock.interceptor.MockFor
+import groovy.util.GroovyTestCase
 
-import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.waits.Conditions;
-import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
+import java.lang.Thread.UncaughtExceptionHandler
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.SWT
+import org.eclipse.swt.layout.FillLayout
+import org.eclipse.swt.widgets.Display
+import org.eclipse.swt.widgets.Shell
+import org.eclipse.swtbot.swt.finder.SWTBot
+import org.eclipse.swtbot.swt.finder.waits.Conditions
 
-import com.hornmicro.swt.utils.SWTHelper;
-import com.hornmicro.ui.MainController;
-
-import groovy.mock.interceptor.MockFor;
-import groovy.util.GroovyTestCase;
+import com.hornmicro.helper.SWTHelper
+import com.hornmicro.ui.MainController
 
 class AboutActionTests extends GroovyTestCase {
 

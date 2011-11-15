@@ -1,0 +1,3 @@
+#!/bin/bash
+
+java -XstartOnFirstThread  -jar GroovyEd.jar 

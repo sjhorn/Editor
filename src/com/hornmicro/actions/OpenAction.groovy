@@ -1,14 +1,11 @@
 package com.hornmicro.actions
 
-import java.io.IOException;
+import org.eclipse.jface.action.Action
+import org.eclipse.jface.dialogs.MessageDialog
+import org.eclipse.swt.SWT
+import org.eclipse.swt.widgets.FileDialog
 
-import org.eclipse.jface.action.Action;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.FileDialog;
-
-import com.hornmicro.TextEditor;
-import com.hornmicro.ui.MainController;
+import com.hornmicro.ui.MainController
 
 class OpenAction extends Action {
     MainController controller
@@ -22,7 +19,7 @@ class OpenAction extends Action {
     }
     
     void run() {
-        def model = controller.model
+        def model = controller.activeModel
         def shell = controller.shell
 
         FileDialog dlg = new FileDialog(shell, SWT.OPEN)

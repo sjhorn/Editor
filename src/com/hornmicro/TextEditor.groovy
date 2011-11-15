@@ -3,9 +3,8 @@ package com.hornmicro;
 import org.eclipse.swt.widgets.Display
 
 import com.hornmicro.ui.MainController
-import com.hornmicro.ui.PersistentDocument
 
-public class TextEditor {
+public class TextEditor implements Runnable {
     MainController controller
     
     public TextEditor() {

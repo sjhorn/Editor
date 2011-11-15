@@ -3,22 +3,14 @@ package com.hornmicro.ui
 import org.eclipse.jface.action.Action
 import org.eclipse.jface.action.MenuManager
 import org.eclipse.jface.action.Separator
-import org.eclipse.jface.text.CursorLinePainter
-import org.eclipse.jface.text.IDocumentPartitioner
-import org.eclipse.jface.text.TextViewerUndoManager
-import org.eclipse.jface.text.rules.FastPartitioner
-import org.eclipse.jface.text.source.AnnotationModel
-import org.eclipse.jface.text.source.AnnotationRulerColumn
-import org.eclipse.jface.text.source.CompositeRuler
-import org.eclipse.jface.text.source.LineNumberChangeRulerColumn
 import org.eclipse.jface.text.source.SourceViewer
-import org.eclipse.jface.text.source.SourceViewerConfiguration
 import org.eclipse.jface.window.ApplicationWindow
 import org.eclipse.swt.SWT
-import org.eclipse.swt.graphics.Font
-import org.eclipse.swt.graphics.FontData
-import org.eclipse.swt.graphics.RGB
-import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.custom.CTabItem
+import org.eclipse.swt.events.FocusEvent
+import org.eclipse.swt.events.FocusListener
+import org.eclipse.swt.graphics.Image
+import org.eclipse.swt.layout.FillLayout
 import org.eclipse.swt.widgets.Composite
 import org.eclipse.swt.widgets.Control
 import org.eclipse.swt.widgets.Display
@@ -38,15 +30,12 @@ import com.hornmicro.actions.SaveAsAction
 import com.hornmicro.actions.SelectAllAction
 import com.hornmicro.actions.UndoAction
 import com.hornmicro.helper.CocoaUIEnhancer
-import com.hornmicro.syntaxhighlight.ColorManager
-import com.hornmicro.syntaxhighlight.PartitionScanner
-import com.hornmicro.syntaxhighlight.TextEditorSourceViewerConfiguration
+import com.hornmicro.ui.editor.ColorManager
+import com.hornmicro.ui.editor.EditorController
+import com.hornmicro.ui.editor.EditorModel
 
-class MainController extends ApplicationWindow {
-    SourceViewer sourceViewer
-    PersistentDocument model 
-    SourceViewerConfiguration config
-    TextViewerUndoManager undoManager
+class MainController extends ApplicationWindow implements Runnable {
+    MainView view
     ColorManager colorManager
     
     Action openAction
@@ -88,8 +77,6 @@ class MainController extends ApplicationWindow {
         preferenceAction = new PreferenceAction(this)
         aboutAction = new AboutAction(this)   
         
-        setUpModel()
-        
         addMenuBar()
         //addToolBar(SWT.FLAT)
     }
@@ -104,17 +91,30 @@ class MainController extends ApplicationWindow {
         super.configureShell(shell)
         shell.text = "Text Editor"
         shell.setSize(800, 400)
+        shell.setBackgroundMode(SWT.INHERIT_DEFAULT)
+        shell.setBackgroundImage(new Image(Display.default, "/Users/shorn/Desktop/seamless_bgs/bg2.jpg"))
     }
 
     protected Control createContents(Composite parent) {
         parent.setLayout(new FillLayout())
-        MainView view = new MainView(parent, SWT.NONE)
-        view.config = config
-        view.model = model
-        view.colorManager = colorManager
+        view = new MainView(parent, SWT.NONE)
+        view.colorManager = colorManager 
         view.createContents()
-        this.undoManager = view.undoManager
-        this.sourceViewer = view.sourceViewer
+        
+        EditorController editor = new EditorController(colorManager)
+        editor.parent = view.tabFolder
+        editor.run()
+        
+        CTabItem tabItem = new CTabItem(view.tabFolder, SWT.CLOSE)
+        tabItem.setText("Test")
+        tabItem.setControl(editor.view)
+        view.tabFolder.addFocusListener(new FocusListener() {
+            void focusGained(FocusEvent arg0) {
+                editor.view.sourceViewer.textWidget.setFocus()
+            }
+            void focusLost(FocusEvent arg0) {
+            }
+        })
         return view
     }
     
@@ -142,10 +142,9 @@ class MainController extends ApplicationWindow {
         
         
         menuManager.add(helpMenu)
-        
         if ( CocoaUIEnhancer.isMac() ) {
             new CocoaUIEnhancer( "Text Editor" ).hookApplicationMenu( 
-                Display.current, 
+                Display.default, 
                 [ handleEvent : { event -> } ] as Listener, 
                 aboutAction, 
                 preferenceAction 
@@ -159,17 +158,12 @@ class MainController extends ApplicationWindow {
         return menuManager
     }
     
-    protected void setUpModel() {
-        
-        this.model = new PersistentDocument()
-        this.config = new TextEditorSourceViewerConfiguration(this)
-        
-        PartitionScanner scanner = new PartitionScanner()
-        IDocumentPartitioner partitioner = new FastPartitioner(
-            scanner,
-            PartitionScanner.TYPES
-        )
-        model.setDocumentPartitioner(TextEditorSourceViewerConfiguration.PARTITIONING, partitioner);
-        partitioner.connect(model);
+    SourceViewer getActiveSourceViewer() {
+        return null
+        //return view.sourceViewer
+    }
+    EditorModel getActiveModel() {
+        return null
+        //return view.model
     }
 }

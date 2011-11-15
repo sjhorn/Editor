@@ -1,11 +1,10 @@
 package com.hornmicro.actions
 
-import org.eclipse.jface.action.Action;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.SWT;
+import org.eclipse.jface.action.Action
+import org.eclipse.jface.dialogs.MessageDialog
+import org.eclipse.swt.SWT
 
-import com.hornmicro.TextEditor;
-import com.hornmicro.ui.MainController;
+import com.hornmicro.ui.MainController
 
 class CloseAction extends Action {
     MainController controller
@@ -19,7 +18,7 @@ class CloseAction extends Action {
     }
     
     void run() {
-        def model = controller.model
+        def model = controller.activeModel
         def shell = controller.shell
         if(checkOverwrite(model, shell)) {
             model.clear()

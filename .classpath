@@ -2,23 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
-	<classpathentry exported="true" kind="con" path="GROOVY_SUPPORT"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="con" path="GROOVY_DSL_SUPPORT"/>
-	<classpathentry kind="lib" path="libs/com.ibm.icu_4.2.1.v20100412.jar"/>
 	<classpathentry kind="lib" path="libs/miglayout-3.7.4-swt.jar"/>
-	<classpathentry kind="lib" path="libs/org.eclipse.core.commands_3.6.0.I20100512-1500.jar"/>
-	<classpathentry kind="lib" path="libs/org.eclipse.core.runtime_3.6.0.v20100505.jar"/>
-	<classpathentry kind="lib" path="libs/org.eclipse.equinox.common_3.6.0.v20100503.jar"/>
-	<classpathentry kind="lib" path="libs/org.eclipse.jface_3.6.2.M20110210-1200.jar"/>
-	<classpathentry kind="lib" path="libs/org.eclipse.jface.databinding_1.4.0.I20100601-0800.jar"/>
-	<classpathentry kind="lib" path="libs/org.eclipse.jface.text_3.6.1.r361_v20100825-0800.jar" sourcepath="/Users/shorn/Downloads/org.eclipse.jface.text.source_3.6.1.r361_v20100825-0800.jar"/>
-	<classpathentry kind="lib" path="libs/org.eclipse.osgi_3.6.2.R36x_v20110210.jar"/>
-	<classpathentry kind="lib" path="libs/org.eclipse.swt_3.6.2.v3659c.jar"/>
-	<classpathentry kind="lib" path="libs/org.eclipse.swt.cocoa.macosx.x86_64_3.6.2.v3659b.jar"/>
-	<classpathentry kind="lib" path="libs/org.eclipse.text_3.5.0.v20100601-1300.jar"/>
 	<classpathentry kind="lib" path="libs/dd-plist.jar"/>
-	<classpathentry kind="lib" path="libs/org.eclipse.core.jobs_3.5.1.R36x_v20100824.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="lib" path="testlibs/org.apache.log4j_1.2.13.v200903072027.jar"/>
 	<classpathentry kind="lib" path="testlibs/org.eclipse.swtbot.junit4_x_2.0.4.20110304_0338-e5aff47-dev-e36.jar"/>
@@ -32,5 +18,35 @@
 	<classpathentry kind="lib" path="testlibs/org.hamcrest.library.source_1.1.0.v20090501071000.jar"/>
 	<classpathentry kind="lib" path="testlibs/org.hamcrest.text_1.1.0.v20090501071000.jar"/>
 	<classpathentry kind="lib" path="testlibs/org.hamcrest.text.source_1.1.0.v20090501071000.jar"/>
+	<classpathentry kind="lib" path="libs/e4/org.eclipse.e4.ui.css.core_0.10.0.v20110613-2030.jar" sourcepath="libs/e4/org.eclipse.e4.ui.css.core.source_0.10.0.v20110613-2030.jar"/>
+	<classpathentry kind="lib" path="libs/e4/org.eclipse.e4.ui.css.core.source_0.10.0.v20110613-2030.jar"/>
+	<classpathentry kind="lib" path="libs/e4/org.eclipse.e4.ui.css.swt_0.10.0.v20110613-2030.jar" sourcepath="libs/e4/org.eclipse.e4.ui.css.swt.source_0.10.0.v20110613-2030.jar"/>
+	<classpathentry kind="lib" path="libs/e4/org.eclipse.e4.ui.css.swt.source_0.10.0.v20110613-2030.jar"/>
+	<classpathentry kind="lib" path="libs/e4/org.eclipse.e4.ui.css.swt.theme_0.9.1.v20110613-2030.jar"/>
+	<classpathentry kind="lib" path="libs/e4/org.eclipse.e4.ui.css.swt.theme.source_0.9.1.v20110613-2030.jar"/>
+	<classpathentry kind="lib" path="libs/e4/org.apache.batik.css_1.6.0.v201011041432.jar"/>
+	<classpathentry kind="lib" path="libs/e4/org.w3c.css.sac_1.3.1.v200903091627.jar"/>
+	<classpathentry kind="lib" path="libs/e4/org.eclipse.e4.ui.widgets_0.11.0.v20110613-2030.jar" sourcepath="/Users/shorn/springsource/eclipseSDK4.1/plugins/org.eclipse.e4.ui.widgets.source_0.11.0.v20110613-2030.jar"/>
+	<classpathentry kind="lib" path="libs/e4/org.apache.batik.util_1.6.0.v201011041432.jar"/>
+	<classpathentry kind="lib" path="libs/e4/org.apache.batik.util.gui_1.6.0.v201011041432.jar"/>
+	<classpathentry kind="lib" path="libs/e4/org.eclipse.e4.ui.workbench.renderers.swt_0.10.0.v20110614-1530.jar"/>
+	<classpathentry kind="lib" path="libs/e4/org.eclipse.e4.ui.workbench.renderers.swt.cocoa_0.10.0.v20110613-2030.jar"/>
+	<classpathentry kind="lib" path="libs/swt/swt-osx-64-3.7.1.jar"/>
+	<classpathentry kind="lib" path="libs/eclipse/org.eclipse.core.commands_3.6.0.I20110111-0800.jar"/>
+	<classpathentry kind="lib" path="libs/eclipse/org.eclipse.core.databinding_1.4.0.I20110111-0800.jar"/>
+	<classpathentry kind="lib" path="libs/eclipse/org.eclipse.core.databinding.beans_1.2.100.I20100824-0800.jar"/>
+	<classpathentry kind="lib" path="libs/eclipse/org.eclipse.core.databinding.observable_1.4.0.I20110222-0800.jar"/>
+	<classpathentry kind="lib" path="libs/eclipse/org.eclipse.core.databinding.property_1.4.0.I20110222-0800.jar"/>
+	<classpathentry kind="lib" path="libs/eclipse/org.eclipse.core.jobs_3.5.100.v20110404.jar"/>
+	<classpathentry kind="lib" path="libs/eclipse/org.eclipse.core.runtime_3.7.0.v20110110.jar"/>
+	<classpathentry kind="lib" path="libs/eclipse/org.eclipse.equinox.common_3.6.0.v20110523.jar"/>
+	<classpathentry kind="lib" path="libs/eclipse/org.eclipse.equinox.registry_3.5.101.R37x_v20110810-1611.jar"/>
+	<classpathentry kind="lib" path="libs/eclipse/org.eclipse.jface_3.7.0.I20110522-1430.jar"/>
+	<classpathentry kind="lib" path="libs/eclipse/org.eclipse.jface.databinding_1.5.0.I20100907-0800.jar"/>
+	<classpathentry kind="lib" path="libs/eclipse/org.eclipse.jface.text_3.7.1.r371_v20110825-0800.jar"/>
+	<classpathentry kind="lib" path="libs/eclipse/org.eclipse.text_3.5.101.r371_v20110810-0800.jar"/>
+	<classpathentry kind="lib" path="libs/eclipse/org.eclipse.osgi_3.7.1.R37x_v20110808-1106.jar"/>
+	<classpathentry kind="lib" path="libs/eclipse/com.ibm.icu_4.2.1.v20100412.jar"/>
+	<classpathentry kind="lib" path="libs/groovy/groovy-all-1.8.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

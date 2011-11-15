@@ -1,12 +1,10 @@
 package com.hornmicro.actions
 
-import org.eclipse.jface.action.Action;
-import org.eclipse.jface.text.source.SourceViewer;
-import org.eclipse.swt.SWT;
+import org.eclipse.jface.action.Action
+import org.eclipse.jface.text.ITextOperationTarget
+import org.eclipse.swt.SWT
 
-import com.hornmicro.TextEditor;
-import com.hornmicro.ui.MainController;
-import com.hornmicro.ui.PersistentDocument;
+import com.hornmicro.ui.MainController
 
 class SelectAllAction extends Action {
     MainController controller
@@ -20,8 +18,8 @@ class SelectAllAction extends Action {
     }
     
     void run() {
-        SourceViewer viewer = controller.sourceViewer
-        PersistentDocument doc = controller.model
-        viewer.setSelectedRange(0, doc.size)
+        controller
+            .activeSourceViewer
+            .doOperation(ITextOperationTarget.SELECT_ALL)
     }
 }

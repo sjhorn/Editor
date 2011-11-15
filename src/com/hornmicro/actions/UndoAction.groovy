@@ -1,10 +1,9 @@
 package com.hornmicro.actions
 
-import org.eclipse.jface.action.Action;
-import org.eclipse.swt.SWT;
+import org.eclipse.jface.action.Action
+import org.eclipse.swt.SWT
 
-import com.hornmicro.TextEditor;
-import com.hornmicro.ui.MainController;
+import com.hornmicro.ui.MainController
 
 
 class UndoAction extends Action {

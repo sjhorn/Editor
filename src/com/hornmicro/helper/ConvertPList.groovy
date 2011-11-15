@@ -1,14 +1,10 @@
 package com.hornmicro.helper
 
+import com.dd.plist.NSDictionary
+import com.dd.plist.PropertyListParser
 
-import groovy.util.XmlSlurper;
 
-import com.dd.plist.NSArray;
-import com.dd.plist.NSData;
-import com.dd.plist.NSDictionary;
-import com.dd.plist.NSNumber;
-import com.dd.plist.NSString;
-import com.dd.plist.PropertyListParser;
+
 
 class ConvertPList {
 
