@@ -48,5 +48,6 @@
 	<classpathentry kind="lib" path="libs/eclipse/org.eclipse.osgi_3.7.1.R37x_v20110808-1106.jar"/>
 	<classpathentry kind="lib" path="libs/eclipse/com.ibm.icu_4.2.1.v20100412.jar"/>
 	<classpathentry kind="lib" path="libs/groovy/groovy-all-1.8.0.jar"/>
+	<classpathentry exported="true" kind="con" path="GROOVY_DSL_SUPPORT"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

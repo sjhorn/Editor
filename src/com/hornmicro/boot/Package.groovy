@@ -5,11 +5,24 @@ import java.util.jar.JarEntry
 import java.util.jar.JarOutputStream
 import java.util.jar.Manifest
 
-import com.hornmicro.TextEditor
+import com.hornmicro.GroovyEd
 
 
 
-
+/*
+ * This file packages the classes and jars into a single runnable jar. 
+ * The techniques is based on the jar-in-jar code from eclipse jdt ui project
+ * and the ideas from SWTJAR (https://github.com/mchr3k/swtjar)
+ * 
+ * The jars and manifest are designed around the behaviour of SWTBootstrap.
+ * 
+ * SWTBootstrap reads the manifest property SWTBootstrap.CLASS_PATH that contains a 
+ * space separated list of jars embedded on the outer jar, each of these are added 
+ * to the classpath prior to the SWTBootstrap.MAIN_CLASS static main method being called.
+ * 
+ * For our purposes the Groovy, Eclipse and SWT files are all added at runtime and
+ * maintain their original jar structure. 
+ */
 class Package {
     static main(args) {
         new File("build/GroovyEd.jar").withOutputStream { os ->
@@ -19,7 +32,7 @@ class Package {
             mainAttributes.putValue(Attributes.Name.MANIFEST_VERSION as String, "1.0")
             [
                 'Manifest-Version' : "1.0",
-                (SWTBootstrap.MAIN_CLASS) : TextEditor.class.name, 
+                (SWTBootstrap.MAIN_CLASS) : GroovyEd.class.name, 
                 (SWTBootstrap.SWT_VERSION) : "3.7.1", 
                 'Main-Class' : SWTBootstrap.class.name
             ].each { k,v -> 

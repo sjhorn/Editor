@@ -1,0 +1,11 @@
+#MainWindow {
+    background-image: url(/Users/shorn/Desktop/junk/seamless_bgs/bg2.jpg);
+}
+
+#Tabs {
+    margin: 10;
+}
+.Editor { 
+    font: 12 "Mensch";
+    background-image: url(/Users/shorn/Desktop/seamless_bgs/paper2.png);
+}

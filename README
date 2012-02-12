@@ -1,3 +1,8 @@
-My first attempt at making an cross platform syntax highlighting editor. 
-Will be using the groovy language and
-building on the foundatation of SWT/JFACE/ECLIPSE. 
+Groovy Ed - the groovy editor for dynamic language enthusiasts and craftsmen.
+
+This project represents my attempt to reinvent the "wheel of text editing" better. Given 
+the amount of time I spend in front of a text editor, I thought making
+this experience more pleasant might prove useful for myself and possibly others.
+
+This project is based on Eclipse, Groovy, SWT and JFACE.
+

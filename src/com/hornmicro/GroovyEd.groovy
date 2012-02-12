@@ -4,11 +4,11 @@ import org.eclipse.swt.widgets.Display
 
 import com.hornmicro.ui.MainController
 
-public class TextEditor implements Runnable {
+public class GroovyEd implements Runnable {
     MainController controller
     
-    public TextEditor() {
-        Display.appName = "Text Editor"
+    public GroovyEd() {
+        Display.appName = "GroovyEd"
         
         controller = new MainController()
     }
@@ -18,6 +18,6 @@ public class TextEditor implements Runnable {
     }
 
     static void main(String[] args) {
-        new TextEditor().run();
+        new GroovyEd().run();
     }
 }

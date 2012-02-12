@@ -92,7 +92,7 @@ class MainController extends ApplicationWindow implements Runnable {
         shell.text = "Text Editor"
         shell.setSize(800, 400)
         shell.setBackgroundMode(SWT.INHERIT_DEFAULT)
-        shell.setBackgroundImage(new Image(Display.default, "/Users/shorn/Desktop/seamless_bgs/bg2.jpg"))
+        //shell.setBackgroundImage(new Image(Display.default, "/Users/shorn/Desktop/seamless_bgs/bg2.jpg"))
     }
 
     protected Control createContents(Composite parent) {
