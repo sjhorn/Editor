@@ -1,5 +1,6 @@
 package com.hornmicro.ui.editor
 
+import org.eclipse.e4.ui.css.swt.CSSSWTConstants
 import org.eclipse.jface.text.CursorLinePainter
 import org.eclipse.jface.text.TextViewerUndoManager
 import org.eclipse.jface.text.source.AnnotationModel
@@ -9,7 +10,6 @@ import org.eclipse.jface.text.source.LineNumberRulerColumn
 import org.eclipse.jface.text.source.SourceViewer
 import org.eclipse.swt.SWT
 import org.eclipse.swt.graphics.Font
-import org.eclipse.swt.graphics.FontData
 import org.eclipse.swt.graphics.RGB
 import org.eclipse.swt.layout.FillLayout
 import org.eclipse.swt.widgets.Composite
@@ -70,6 +70,7 @@ class EditorView extends Composite {
         clp.setHighlightColor(colorManager.getColor(new RGB(0xff, 0xfe, 0xcc)))
         sourceViewer.addPainter(clp)
         
+        /*
         Font initialFont = sourceViewer.textWidget.font
         FontData[] fontData = initialFont.getFontData();
         for (int i = 0; i < fontData.length; i++) {
@@ -78,6 +79,8 @@ class EditorView extends Composite {
         }
         Font newFont = new Font(Display.current, fontData);
         sourceViewer.textWidget.font = newFont
+        */
+        sourceViewer.textWidget.setData(CSSSWTConstants.CSS_CLASS_NAME_KEY, "Editor" )
         
         undoManager = new TextViewerUndoManager(500)
         undoManager.connect(sourceViewer)

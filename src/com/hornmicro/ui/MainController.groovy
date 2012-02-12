@@ -1,5 +1,6 @@
 package com.hornmicro.ui
 
+import org.eclipse.e4.ui.css.swt.CSSSWTConstants
 import org.eclipse.jface.action.Action
 import org.eclipse.jface.action.MenuManager
 import org.eclipse.jface.action.Separator
@@ -9,8 +10,8 @@ import org.eclipse.swt.SWT
 import org.eclipse.swt.custom.CTabItem
 import org.eclipse.swt.events.FocusEvent
 import org.eclipse.swt.events.FocusListener
-import org.eclipse.swt.graphics.Image
 import org.eclipse.swt.layout.FillLayout
+import org.eclipse.swt.layout.GridLayout
 import org.eclipse.swt.widgets.Composite
 import org.eclipse.swt.widgets.Control
 import org.eclipse.swt.widgets.Display
@@ -30,6 +31,7 @@ import com.hornmicro.actions.SaveAsAction
 import com.hornmicro.actions.SelectAllAction
 import com.hornmicro.actions.UndoAction
 import com.hornmicro.helper.CocoaUIEnhancer
+import com.hornmicro.ui.css.CSSModule
 import com.hornmicro.ui.editor.ColorManager
 import com.hornmicro.ui.editor.EditorController
 import com.hornmicro.ui.editor.EditorModel
@@ -91,8 +93,22 @@ class MainController extends ApplicationWindow implements Runnable {
         super.configureShell(shell)
         shell.text = "Text Editor"
         shell.setSize(800, 400)
-        shell.setBackgroundMode(SWT.INHERIT_DEFAULT)
         //shell.setBackgroundImage(new Image(Display.default, "/Users/shorn/Desktop/seamless_bgs/bg2.jpg"))
+        
+        
+        GridLayout layout = new GridLayout()
+        shell.setLayout(layout);
+        shell.setData(CSSSWTConstants.CSS_ID_KEY, "MainWindow" )
+        shell.setData(CSSSWTConstants.MARGIN_WRAPPER_KEY, "true")
+        shell.setBackgroundMode(SWT.INHERIT_DEFAULT )
+        
+        final def cssModule = new CSSModule()
+        cssModule.parseStyleSheet(CSSModule.class.getResourceAsStream('groovyed.css'))
+        Display.getDefault().asyncExec({
+            cssModule.applyStyles(shell)
+        })
+        
+        
     }
 
     protected Control createContents(Composite parent) {

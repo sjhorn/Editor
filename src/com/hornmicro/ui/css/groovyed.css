@@ -1,5 +1,5 @@
 #MainWindow {
-    background-image: url(/Users/shorn/Desktop/junk/seamless_bgs/bg2.jpg);
+    background-image: url(bg2.jpg);
 }
 
 #Tabs {
@@ -7,5 +7,5 @@
 }
 .Editor { 
     font: 12 "Mensch";
-    background-image: url(/Users/shorn/Desktop/seamless_bgs/paper2.png);
+    background-image: url(paper2.png);
 }

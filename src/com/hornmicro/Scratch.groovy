@@ -1,7 +1,5 @@
 package com.hornmicro
 
-import org.eclipse.e4.ui.css.core.dom.properties.ICSSPropertyHandler
-import org.eclipse.e4.ui.css.core.engine.CSSEngine;
 import org.eclipse.e4.ui.css.swt.CSSSWTConstants
 import org.eclipse.jface.layout.GridDataFactory
 import org.eclipse.swt.SWT
@@ -12,7 +10,6 @@ import org.eclipse.swt.layout.FillLayout
 import org.eclipse.swt.layout.GridLayout
 import org.eclipse.swt.widgets.Display
 import org.eclipse.swt.widgets.Shell
-import org.w3c.dom.css.CSSValue;
 
 import com.hornmicro.ui.css.CSSModule
 

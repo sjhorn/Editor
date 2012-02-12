@@ -1,5 +1,7 @@
 package com.hornmicro.ui
 
+import org.eclipse.e4.ui.css.swt.CSSSWTConstants
+import org.eclipse.jface.layout.GridDataFactory
 import org.eclipse.swt.SWT
 import org.eclipse.swt.custom.CTabFolder
 import org.eclipse.swt.graphics.Image
@@ -23,8 +25,16 @@ class MainView extends Composite {
         fillLayout.marginWidth = 4
         setLayout(fillLayout)
         
-        tabFolder = new CTabFolder(this, SWT.FLAT)
+//        tabFolder = new CTabFolder(this, SWT.FLAT)
+//        tabFolder.setBackgroundMode(SWT.NO_BACKGROUND)
+//        tabFolder.setLayout(new FillLayout())
+        
+        
+        tabFolder = new CTabFolder(this, SWT.CLOSE )
+        GridDataFactory.fillDefaults().grab( true, true ).applyTo(tabFolder)
+        //tabFolder.setRenderer(new CTabRendering(tabFolder))
         tabFolder.setBackgroundMode(SWT.NO_BACKGROUND)
+        tabFolder.setData(CSSSWTConstants.CSS_ID_KEY, "Tabs" )
         tabFolder.setLayout(new FillLayout())
     }
 }
