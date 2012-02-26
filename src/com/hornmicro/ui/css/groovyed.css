@@ -1,11 +1,13 @@
 #MainWindow {
     background-image: url(bg2.jpg);
+    background-color: purple;
 }
 
 #Tabs {
-    margin: 10;
+    margin: 15;  
 }
 .Editor { 
-    font: 12 "Mensch";
-    background-image: url(paper2.png);
+   font: 14 "Menlo";
+   background-image: url(paper2.png);
+   background-color: pink;  
 }

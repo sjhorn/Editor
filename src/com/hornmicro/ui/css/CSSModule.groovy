@@ -47,7 +47,9 @@ class CSSModule {
           }
         })
     }
-    
+    void reset() {
+        engine.reset()
+    }
     void applyStyles(Control control) {
         engine.applyStyles(control, true)
     }
