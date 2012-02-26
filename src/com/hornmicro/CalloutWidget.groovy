@@ -71,7 +71,8 @@ class CalloutWidget extends Composite implements PaintListener, DisposeListener 
         int triangleMid = triangleOffset+(triangleWidth/2)
         
         // Drop Shadow
-        gc.alpha = 60
+        
+        gc.alpha = 10
         gc.fillRoundRectangle(0, triangleHeight, bounds.width, offsetHeight, edgeRadius, edgeRadius)
         gc.fillPolygon([
             triangleOffset-2, triangleHeight,
@@ -79,7 +80,7 @@ class CalloutWidget extends Composite implements PaintListener, DisposeListener 
             triangleOffset+triangleWidth+2, triangleHeight
         ] as int[])
         
-        gc.alpha = 80
+        gc.alpha = 20
         gc.fillRoundRectangle(1, triangleHeight+1, bounds.width-2, offsetHeight-2, edgeRadius, edgeRadius)
         gc.fillPolygon([
             triangleOffset-1, triangleHeight+1,
