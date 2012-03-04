@@ -2,26 +2,32 @@ package com.hornmicro
 
 import org.eclipse.swt.SWT
 import org.eclipse.swt.events.DisposeEvent
+import org.eclipse.swt.events.FocusAdapter;
+import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseAdapter
 import org.eclipse.swt.events.MouseEvent
 import org.eclipse.swt.events.MouseMoveListener
 import org.eclipse.swt.events.MouseTrackAdapter
 import org.eclipse.swt.events.PaintEvent
+import org.eclipse.swt.events.TraverseEvent
+import org.eclipse.swt.events.TraverseListener
 import org.eclipse.swt.graphics.Color
 import org.eclipse.swt.graphics.FontMetrics
 import org.eclipse.swt.graphics.GC
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.RGB
 import org.eclipse.swt.graphics.Rectangle
 import org.eclipse.swt.widgets.Composite
 import org.eclipse.swt.widgets.Display
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Listener
+import org.eclipse.swt.widgets.Menu
 import org.eclipse.swt.widgets.Shell
 import org.eclipse.swt.widgets.Text
 
-class CalloutListWidget extends CalloutWidget implements Listener, MouseMoveListener {
-    private List items = ["Item 1 - a really long item", "Item 2", "Item 3"]
-    private int selectedIndex = 1
+class CalloutListWidget extends CalloutWidget implements MouseMoveListener, TraverseListener {
+    List items = ["Empty"]
+    private int selectedIndex = -1
     private int itemHeight
     
     private Color selectBackgroundTop = new Color(this.display, 0x22, 0x7d, 0xd0)
@@ -29,22 +35,37 @@ class CalloutListWidget extends CalloutWidget implements Listener, MouseMoveList
         blend(selectBackgroundTop.getRGB(), new RGB(0x00, 0x00, 0x00), 0.8) 
     )
     
+    
     CalloutListWidget(Composite parent) {
         super(parent)
+        setCursor(display.getSystemCursor(SWT.CURSOR_ARROW))
+        setVisible(false)
+        
         addMouseMoveListener(this)
         addMouseTrackListener(new MouseTrackAdapter() {
-             void mouseExit(MouseEvent arg0) {
+            void mouseExit(MouseEvent me) {
                  selectedIndex = -1
                  CalloutListWidget.this.redraw()
-             }
+            }
         })
-        display.addFilter(SWT.KeyUp, this)
+        addFocusListener(new FocusAdapter() {
+            void focusLost(FocusEvent fe) {
+                CalloutListWidget.this.setVisible(false)
+            }
+        })
+        addMouseListener(new MouseAdapter() {
+            void mouseDown(MouseEvent arg0) {
+                CalloutListWidget.this.selectItem()
+            }
+        })
+        addTraverseListener(this)
     }
     
     void mouseMove(MouseEvent me) {
 		if(me.y && itemHeight) {
-            int index = ((me.y - triangleHeight - 10) / itemHeight) as int
-            if(index < items.size()) {
+            int ypos = (me.y - triangleHeight - 10)
+            int index = (ypos / itemHeight) as int
+            if(ypos >= 0 && index < items.size()) {
                 if(index != selectedIndex) {
                     selectedIndex = index
                     redraw()
@@ -55,19 +76,38 @@ class CalloutListWidget extends CalloutWidget implements Listener, MouseMoveList
             }
         }
 	}
-    
-    void handleEvent(Event e) {
-        switch(e.keyCode) {
-            case SWT.ARROW_UP:
-                selectedIndex--
+
+    void keyTraversed(TraverseEvent e) {
+        switch(e.detail) {
+            case SWT.TRAVERSE_ARROW_PREVIOUS:
+                if(selectedIndex > 0) {
+                    selectedIndex-- 
+                    redraw()
+                }
                 break
-            case SWT.ARROW_DOWN:
-                selectedIndex++
-                break    
+            case SWT.TRAVERSE_ARROW_NEXT:
+                if(selectedIndex < (items.size() - 1)) {
+                    selectedIndex++
+                    redraw()
+                }
+                break;
+            case SWT.TRAVERSE_ESCAPE:
+                selectedIndex = -1
+                setVisible(false)
+                break
+            case SWT.TRAVERSE_RETURN:
+                selectItem()
+                break
+               
         }
-        redraw()
-        
     }
+    
+    void selectItem() {
+        
+        println "Item selected is ${selectedIndex} -> ${items[selectedIndex]}"
+        setVisible(false)
+    }
+    
     
     RGB blend(RGB src, RGB dst, float alpha) {
         def d_alpha = (1 - alpha)
@@ -78,18 +118,28 @@ class CalloutListWidget extends CalloutWidget implements Listener, MouseMoveList
         )
     }
     
+    int getItemHeight() {
+        if(!itemHeight) {
+            GC gc = new GC(this)
+            FontMetrics fm = gc.getFontMetrics()
+            itemHeight = fm.height + 1
+            gc.dispose()
+        }
+        return itemHeight
+    }
+    
     void paintControl(PaintEvent pe) {
         super.paintControl(pe)
         Rectangle bounds = getClientArea()
         int offsetHeight = bounds.height - triangleHeight
         GC gc = pe.gc
         
-        gc.setClipping(null)
         gc.alpha = 255
         
         FontMetrics fm = gc.getFontMetrics()
         itemHeight = fm.height + 1
         int y = triangleHeight + 10
+        gc.setClipping(3, 0, bounds.width - 6, bounds.height)
         items.eachWithIndex { it, index ->
             
             if(index == selectedIndex) {
@@ -123,12 +173,29 @@ class CalloutListWidget extends CalloutWidget implements Listener, MouseMoveList
         bottomline.dispose()
     }
 
+    Point computeSize(int wHint, int hHint) {
+        return new Point(170, (items.size() * getItemHeight() ) + triangleHeight + 20)
+    }
+    
+    void pointAt(int x, int y) {
+        /*
+        int triangleCenter = triangleOffset + triangleWidth/2
+        if(x - triangleCenter < 0) {
+            triangleOffset = x
+            setLocation(0, y)
+        } else {
+            setLocation(x - triangleCenter, y)
+        }
+        */
+        setLocation(x, y)
+    }
+    
     void widgetDisposed(DisposeEvent de) {
 		super.widgetDisposed(de)
-        
         selectBackgroundTop.dispose()
         selectBackgroundBottom.dispose()
 	}
+    
     
     
     
@@ -138,11 +205,11 @@ class CalloutListWidget extends CalloutWidget implements Listener, MouseMoveList
         Shell shell = new Shell(display);
 
         final CalloutListWidget cw = new CalloutListWidget(shell)
-        cw.setSize(170, 240)
-        cw.setVisible(false)
+        cw.setItems(["Item 1", "Item 2", "Item 3"])
         
         
         Text st = new Text(shell, SWT.H_SCROLL | SWT.V_SCROLL | SWT.WRAP)
+        st.setMenu(new Menu(shell, 0))
         st.setBounds(0, 0, 500, 500)
         st.text = /
 Note: The NO_BACKGROUND, NO_FOCUS, NO_MERGE_PAINTS, and NO_REDRAW_RESIZE styles are intended for use with Canvas. They can be used with Composite if you are drawing your own, but their behavior is undefined if they are used with subclasses of Composite other than Canvas.
@@ -154,9 +221,12 @@ This class may be subclassed by custom control implementors who are building con
         
         st.addMouseListener(new MouseAdapter() {
             void mouseDown(MouseEvent me) {
-                if(me.button == 1) {
-                    cw.setLocation(me.x - 20, me.y+10)
+                if(me.button == 3) {
+                    //cw.setLocation(me.x - 20, me.y+10)
+                    cw.pointAt(me.x, me.y)
+                    cw.setSize(cw.computeSize(-1,-1))
                     cw.setVisible(true)
+                    cw.setFocus()
                     cw.redraw()
                     
                 }

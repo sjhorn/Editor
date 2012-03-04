@@ -28,7 +28,7 @@ class CalloutWidget extends Composite implements PaintListener, DisposeListener 
     private Color light
     
     CalloutWidget(Composite parent) {
-        super(parent, SWT.DOUBLE_BUFFERED | SWT.NO_BACKGROUND | SWT.INHERIT_DEFAULT)
+        super(parent, SWT.DOUBLE_BUFFERED | SWT.NO_BACKGROUND | SWT.INHERIT_DEFAULT )
         addPaintListener(this)
         addDisposeListener(this)
         

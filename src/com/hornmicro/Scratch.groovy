@@ -38,7 +38,7 @@ class Scratch {
         shell.setData(CSSSWTConstants.CSS_ID_KEY, "MainWindow" )
         shell.setData(CSSSWTConstants.MARGIN_WRAPPER_KEY, "true")
         shell.setBackgroundMode(SWT.INHERIT_DEFAULT )
-        
+      
         def tabFolder = new CTabFolder(shell, SWT.CLOSE )
         GridDataFactory.fillDefaults().grab( true, true ).applyTo(tabFolder)
         //tabFolder.setRenderer(new CTabRendering(tabFolder))
@@ -46,9 +46,34 @@ class Scratch {
         tabFolder.setData(CSSSWTConstants.CSS_ID_KEY, "Tabs" )
         tabFolder.setLayout(new FillLayout())
         
+        final CalloutListWidget cw = new CalloutListWidget(tabFolder)
+        GridDataFactory.fillDefaults().exclude(true).applyTo(cw)
+        
         final def text = new StyledText(tabFolder, SWT.H_SCROLL | SWT.V_SCROLL)
         text.setData(CSSSWTConstants.CSS_CLASS_NAME_KEY, "Editor" )
         text.text = "0 1 3 ! ? & i j l Q q < > \n" * 200
+        
+        text.addMouseListener(new MouseAdapter() {
+            void mouseDown(MouseEvent me) {
+                if(me.button == 3) {
+                    cw.setItems( [
+                         "charset",
+                         "class",
+                         "contenteditable",
+                         "contextmenu",
+                         "dir",
+                         "draggable"
+                    ])
+                    cw.setLocation(me.x - 20, me.y+10)
+                    cw.setSize(cw.computeSize(-1, -1))
+                    cw.setVisible(true)
+                    cw.setFocus()
+                    cw.redraw()
+                    
+                }
+            }
+        })
+        
         
         CTabItem tabItem = new CTabItem(tabFolder, SWT.CLOSE)
         tabItem.setText("Test")
@@ -64,91 +89,16 @@ class Scratch {
         
         
         
-        /*
-        final Menu menu = new Menu(shell , SWT.POP_UP)
-        MenuItem item = new MenuItem(menu, SWT.PUSH);
-        item.setText("Popup");
-        item = new MenuItem(menu, SWT.PUSH);
-        item.setText("Popup1");
-        item = new MenuItem(menu, SWT.PUSH);
-        item.setText("Popup2");
-        item = new MenuItem(menu, SWT.PUSH);
-        item.setText("Popup3");
-        item = new MenuItem(menu, SWT.PUSH);
-        item.setText("Popup4");
-        item = new MenuItem(menu, SWT.PUSH);
-        item.setText("Popup5");
-        */
-        /*
-        ContentProposalAdapter adapter = new ContentProposalAdapter(
-            text,
-            new StyledTextContentAdapter(),
-            new SimpleContentProposalProvider([" A", "B", "C"]  as  String []),
-            null,
-            null)
-        */
         
         
-        
-        //AutoCompleteField afield = new AutoCompleteField(text, new StyledTextContentAdapter(),["one", "two"] as String[])
-        
-        
-        shell.addMouseListener([
-            mouseDown: { MouseEvent me ->
-                if(me.button == 3) {
-                    //new DialogTray(shell).open()
-                    //new MyPopup().open()
-                    
-                    //
-                    def tip = new Shell (null, (SWT.RESIZE | SWT.TOOL) & ~(SWT.NO_TRIM | SWT.SHELL_TRIM))
-                    def fProposalTable = new Table(tip, SWT.H_SCROLL | SWT.V_SCROLL)
-                    
-                    fProposalTable.setLocation(0, 0);
-                    
-                    GridLayout layout3 = new GridLayout();
-                    layout3.marginWidth = 0;
-                    layout3.marginHeight = 0;
-                    tip.setLayout(layout3);
-            
-                    GridData data = new GridData(GridData.FILL_BOTH);
-                    fProposalTable.setLayoutData(data);
-            
-                    tip.pack();
-                   
-                    tip.setBounds(300,300, 200,200)
-                    
-                    
-                    tip.open()
-                    /*
-                    //tip.setAlpha(190)
-                    tip.setBackgroundMode(SWT.INHERIT_DEFAULT )
-                    //tip.setBackground (display.getSystemColor (SWT.COLOR_BLACK));
-                    //tip.setForeground (display.getSystemColor (SWT.COLOR_WHITE));
-                    FillLayout layout2 = new FillLayout();
-                    layout2.marginWidth = 2;
-                    tip.setLayout (layout2);
-                    def label = new Label (tip, SWT.NONE);
-                    //label.setForeground (display.getSystemColor (SWT.COLOR_WHITE));
-                    //label.setBackground (display.getSystemColor (SWT.COLOR_INFO_BACKGROUND));
-                    label.setText ("Some Text\n"*10);
-
-                    Point size = tip.computeSize (SWT.DEFAULT, SWT.DEFAULT);
-                    
-
-                    Point pt = shell.toDisplay (me.x, me.y);
-                    tip.setBounds (pt.x, pt.y - 200, 200, 200);
-                    tip.setVisible (true);
-                    */
-                }
-            }] 
-        as MouseAdapter)
         //shell.pack();
         shell.setSize(600,600)
         shell.open();
         
+        final Boolean shutdown = false
         final Long lastModified = css.lastModified()
-        Thread.start {
-            while(1) {
+        Thread cssThread = Thread.start {
+            while(!shutdown) {
                 long modified = css.lastModified()
                 if(modified != lastModified) {
                     Display.default.asyncExec {
@@ -172,6 +122,8 @@ class Scratch {
             if (!display.readAndDispatch())
                 display.sleep();
         }
+        shutdown = true
+        cssThread.join()
         display.dispose();
     }
     
